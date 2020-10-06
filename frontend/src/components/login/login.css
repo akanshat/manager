@@ -1,0 +1,61 @@
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  background: rgb(0, 0, 0, 0.4);
+  position: fixed;
+  z-index: 10;
+}
+
+.overlay-content {
+  width: 40vw;
+  height: 60vh;
+  background-color: white;
+  margin-left: 30vw;
+  margin-top: 20vh;
+}
+
+.form-wrapper {
+  padding: 4vw 3vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.form-wrapper > h1 {
+  text-transform: uppercase;
+  margin-bottom: 50px;
+}
+
+.input-item {
+  outline: none;
+  margin: 10px;
+  width: 40vh;
+  height: 5vh;
+  border: 1px solid #e7a200;
+  text-align: center;
+  color: #e7a200;
+  font-size: 2.5vh;
+}
+
+.input-item::placeholder {
+  color: #e7a200;
+}
+
+.input-button {
+  margin-top: 50px;
+  outline: none;
+  border: none;
+  color: white;
+  background-color: #ff5e6c;
+  width: 10vw;
+  height: 6vh;
+  font-size: 2vh;
+  font-weight: 800;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.input-button:hover {
+  background-color: #e65863;
+}
