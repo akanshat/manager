@@ -1,0 +1,14 @@
+version: "1.27.4"
+
+services: 
+  react-app:
+    stdin_open: true
+    build: 
+      context:
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - "/app/node_modules"
+      - "./:/app"
+

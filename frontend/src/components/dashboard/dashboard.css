@@ -1,0 +1,35 @@
+.dashboard-container {
+  background-color: white;
+  width: 100vw;
+  height: 150vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-header {
+  width: 95vw;
+  height: 50vh;
+  background-color: #fff5d7;
+  position: fixed;
+  top: 3vh;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 20px;
+}
+
+.dashbg {
+  height: 90%;
+}
+
+.searchbox{
+    outline: none;
+    width: 35vw;
+    height: 5vh;
+    border-radius: 10px;
+    border: 1px solid #feb300;
+    text-align: center;
+}
