@@ -1,10 +1,12 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+require('dotenv').config()
 var router = express.Router();
 
 const hospitalRouter = require("./routes/hospital.route");
 const patientRouter = require("./routes/patient.route");
+const userRouter = require("./routes/user.route");
 
 const server = express();
 
@@ -20,7 +22,7 @@ server.use(cors(corsOptions));
 const db = require("./models");
 db.sequelize.sync();
 
-// router.use("/user", userRouter);
+router.use("/user", userRouter);
 router.use("/hospital", hospitalRouter);
 router.use("/patient", patientRouter);
 
