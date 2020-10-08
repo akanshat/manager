@@ -22,7 +22,14 @@ const create = async (req, res) => {
 
 const findAll = async (req, res) => {
   try {
-    var hospitalList = await Hospital.findAll();
+    const { query } = req.body;
+    var hospitalList = await Hospital.findAll({
+      where: {
+        name: {
+          [Op.substring]: query,
+        },
+      },
+    });
     if (!hospitalList) throw new Error("No Hospitals found");
     res.status(200).json(hospitalList);
   } catch (error) {
@@ -38,7 +45,7 @@ const findOne = async (req, res) => {
     const hospitalId = req.params.id;
     const hospitalItem = await Hospital.findOne({
       where: {
-        id: hospitalId
+        id: hospitalId,
       },
     });
 

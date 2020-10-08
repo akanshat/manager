@@ -6,7 +6,7 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", hospital.create);
-router.get("/all", hospital.findAll);
+router.post("/all", hospital.findAll);
 router.get("/:id", hospital.findOne);
 
 module.exports = router;
