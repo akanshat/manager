@@ -17,8 +17,9 @@ const Dashboard = () => {
   useEffect(() => {
     const { backendUrl } = config;
     fetch(`${backendUrl}/hospital/all`, {
-      method: "get",
-      headers: {},
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query }),
     })
       .then((response) => response.json())
       .then((result) => setHosList(result));

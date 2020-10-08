@@ -61,8 +61,7 @@ INSERT INTO
     bloodtype,
     weight,
     height,
-    details,
-    admission_date
+    details
   )
 VALUES
   (
@@ -76,8 +75,7 @@ VALUES
     "A+",
     50.5,
     5.8,
-    "cold, fever",
-    "2020-10-07 00:47:00"
+    "cold, fever"
   );
 
 INSERT INTO
