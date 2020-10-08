@@ -54,7 +54,7 @@ module.exports = (sequelize, Sequelize) => {
       },
       admission_date: {
         type: Sequelize.DATE,
-        allowNull: false,
+        defaultValue: Sequelize.NOW
       },
     },
     {
