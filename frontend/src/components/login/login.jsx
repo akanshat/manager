@@ -18,8 +18,8 @@ const Login = () => {
         icon: "warning",
         title: "Warning: Empty Fields",
       });
+      return <Redirect to="/login" />;
     }
-
     const { token: fetchToken } = await fetch(`${backendUrl}/user/login`, {
       method: "post",
       headers: {
@@ -33,7 +33,9 @@ const Login = () => {
         icon: "warning",
         title: "Incorrect email or password",
       });
+      return <Redirect to="/login" />;
     }
+
     localStorage.setItem("token", fetchToken);
     setToken(fetchToken);
   };
@@ -45,7 +47,7 @@ const Login = () => {
     });
   };
 
-   if (token) return <Redirect to="/dashboard" />;
+  if (token) return <Redirect to="/dashboard" />;
 
   return (
     <div className="overlay">

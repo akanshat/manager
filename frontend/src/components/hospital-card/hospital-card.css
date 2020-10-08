@@ -1,0 +1,24 @@
+.hospital-card-container{
+    border: 2px solid #feb300;
+    border-radius: 10px;
+    width: 80vw;
+    height: 12vh;
+    margin-top: 3vh;
+    padding: 20px;
+    font-size: 2.5vh;
+    font-weight: 700;
+    color: #feb300;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-transform: uppercase;
+}
+
+.hospital-card-content{
+    font-size: 2vh;
+    font-weight: 200;
+    color: black;
+    display: flex;
+    justify-content: space-around;
+    text-transform: capitalize;
+}
