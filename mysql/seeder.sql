@@ -13,7 +13,8 @@ CREATE TABLE user(
 
 CREATE TABLE hospital(
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  name varchar(255) NOT NULL
+  name varchar(255) NOT NULL,
+  patient_count INT DEFAULT 0
 );
 
 CREATE TABLE patient(
@@ -29,7 +30,7 @@ CREATE TABLE patient(
   weight DOUBLE NOT NULL,
   height DOUBLE NOT NULL,
   details TINYTEXT NOT NULL,
-  admission_date DATETIME NOT NULL,
+  admission_date DATETIME  NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT FK_hospital_id FOREIGN KEY (hospital_id) REFERENCES hospital(id)
 );
 
@@ -91,8 +92,7 @@ INSERT INTO
     bloodtype,
     weight,
     height,
-    details,
-    admission_date
+    details
   )
 VALUES
   (
@@ -106,6 +106,5 @@ VALUES
     "AB-",
     67,
     6.2,
-    "fever",
-    "2020-10-06 10:00:20"
+    "fever"
   );
