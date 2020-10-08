@@ -1,39 +1,33 @@
 import React, { useState } from "react";
+import { Link, Redirect } from "react-router-dom";
+import { useAuth } from "../../contexts/auth";
 
 import "./home.css";
 
 import HomeImage from "../../assets/homebg.png";
-import Login from "../login/login";
-import Register from "../register/register";
 
 const Home = () => {
-  const [overlay, setOverlay] = useState(0);
-
+  const { token } = useAuth();
+  if (token) return <Redirect to="/dashboard" />;
   return (
     <>
-      {overlay === 1 ? <Login /> : null}
-      {overlay === 2 ? <Register /> : null}
-      <div className="home-container" >
+      <div className="home-container">
         <div className="home-nav">
           <div className="home-nav-left">Belgaum Hospitals</div>
           <div className="home-nav-right">
-            <button
-              type="button"
-              className="home-buttons"
-              onClick={() => setOverlay(1)}
-            >
-              LOGIN
-            </button>
-            <button
-              type="button"
-              className="home-buttons"
-              onClick={() => setOverlay(2)}
-            >
-              REGISTER
-            </button>
+            <Link to="/login">
+              <button type="button" className="home-buttons">
+                LOGIN
+              </button>
+            </Link>
+            <Link to="/register">
+              <button type="button" className="home-buttons">
+                REGISTER
+              </button>
+            </Link>
           </div>
         </div>
-        <div >
+        <div>
           <div className="home-content">
             <div className="intro-content">
               <div className="intro">Digital Hospital Manager</div>

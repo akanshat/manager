@@ -40,9 +40,22 @@ const create = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).send({
-      message: err.message || "Error creating the patient entry",
+      message: err.message || "Error creating the patient entry.",
     });
   }
 };
 
-module.exports = { create };
+const findAll = async (req, res) => {
+  try {
+    const patientList = await Patient.findAll();
+    if (!patientList) throw new Error("No patient found");
+    res.status(200).json({ patientList });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      message: err.message || "Error fetching patients.",
+    });
+  }
+};
+
+module.exports = { create, findAll };

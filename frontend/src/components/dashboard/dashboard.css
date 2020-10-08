@@ -1,35 +1,51 @@
 .dashboard-container {
   background-color: white;
   width: 100vw;
-  height: 150vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow-x: hidden;
+  position: absolute;
+}
+
+.logout-button{
+  width: 2vw;
+  position: fixed;
+  z-index: 5;
+  top: 4.5vh;
+  right: 1.5vw;
+  cursor: pointer;
 }
 
 .dashboard-header {
-  width: 95vw;
+  width: 96vw;
   height: 50vh;
   background-color: #fff5d7;
-  position: fixed;
-  top: 3vh;
+  z-index: 2;
+  margin-top: 3vh;
   border-radius: 20px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   padding: 20px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 
 .dashbg {
   height: 90%;
 }
 
-.searchbox{
-    outline: none;
-    width: 35vw;
-    height: 5vh;
-    border-radius: 10px;
-    border: 1px solid #feb300;
-    text-align: center;
+.searchbox {
+  outline: none;
+  width: 35vw;
+  height: 5vh;
+  border-radius: 10px;
+  border: 1px solid #feb300;
+  text-align: center;
+}
+.dashboard-divider {
+  height: 150vh;
 }

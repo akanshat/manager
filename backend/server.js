@@ -10,14 +10,11 @@ const userRouter = require("./routes/user.route");
 
 const server = express();
 
-var corsOptions = {
-  origin: "http://localhost:8081",
-};
 const PORT = process.env.PORT || 5000;
 
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
-server.use(cors(corsOptions));
+server.use(cors());
 
 const db = require("./models");
 db.sequelize.sync();

@@ -1,5 +1,7 @@
 module.exports = (sequelize, Sequelize) => {
-    const Patient = sequelize.define("patient", {
+  const Patient = sequelize.define(
+    "patient",
+    {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -20,7 +22,7 @@ module.exports = (sequelize, Sequelize) => {
       phone: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
+        unique: true,
       },
       emergency_contact: {
         type: Sequelize.STRING,
@@ -31,8 +33,8 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
       },
       gender: {
-        type: Sequelize.ENUM('male', 'female'),
-        allowNull: false
+        type: Sequelize.ENUM("male", "female"),
+        allowNull: false,
       },
       bloodtype: {
         type: Sequelize.STRING,
@@ -46,11 +48,20 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.DOUBLE,
         allowNull: false,
       },
+      details: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
       admission_date: {
         type: Sequelize.DATE,
         allowNull: false,
-      }
-    });
-  
-    return Patient;
-  };
+      },
+    },
+    {
+      tableName: "patient",
+      timestamps: false,
+    }
+  );
+
+  return Patient;
+};
