@@ -58,11 +58,10 @@ const login = async (req, res) => {
     });
     const hash = dbUser.hash;
 
-    if (!hash) throw new Error("No such user exists");
+    if (!hash) res.status(404).json("No such user exists");
 
     const validPassword = await bcrypt.compare(password, hash);
-    if (!validPassword)
-      return res.status(401).send("Invalid email or password");
+    if (!validPassword) return res.status(400).json({ error: "Invalid email or password" });
 
     const token = jwt.sign(email, accessTokenSecret);
     res.status(200).json({ token });

@@ -12,6 +12,9 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         unique: true,
       },
+      patient_count: {
+        type: Sequelize.INTEGER,
+      }
     },
     {
       tableName: "hospital",
