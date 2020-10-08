@@ -24,7 +24,7 @@ const findAll = async (req, res) => {
   try {
     var hospitalList = await Hospital.findAll();
     if (!hospitalList) throw new Error("No Hospitals found");
-    res.status(300).json(hospitalList);
+    res.status(200).json(hospitalList);
   } catch (error) {
     console.log(err);
     res.status(500).send({
@@ -33,6 +33,24 @@ const findAll = async (req, res) => {
   }
 };
 
-// exports.findOne = (req, res) => {};
+const findOne = async (req, res) => {
+  try {
+    const hospitalId = req.params.id;
+    const hospitalItem = await Hospital.findOne({
+      where: {
+        id: hospitalId
+      },
+    });
 
-module.exports = { create, findAll };
+    if (!hospitalItem) throw new Error("Not Found");
+
+    res.status(200).json(hospitalItem);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      message: err.message || "Error finding the hospital",
+    });
+  }
+};
+
+module.exports = { create, findAll, findOne };
