@@ -14,6 +14,7 @@ module.exports = (sequelize, Sequelize) => {
       },
       patient_count: {
         type: Sequelize.INTEGER,
+        defaultValue: 0
       }
     },
     {

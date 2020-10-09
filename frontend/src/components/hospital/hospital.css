@@ -1,0 +1,36 @@
+.hospital-page{
+    width: 100vw;
+    height: auto;
+}
+
+.input-form-container{
+    background-color: #fff5d7;
+    background-size: contain;
+    height: 80vh;
+    padding: 20px;
+}
+
+.input-field-container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.input-field{
+    outline: none;
+    margin: 10px;
+    width: 20vw;
+    height: 3vh;
+    border: 1px solid #e7a200;
+    text-align: center;
+    color: #e7a200;
+    font-size: 2vh;
+}
+
+.select{
+    background-color: white;
+    text-indent: 40%;
+}

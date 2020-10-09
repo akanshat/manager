@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import config from "../../config";
 import "./hospital-card.css";
 
@@ -14,18 +15,20 @@ const HospitalCard = ({ hospital }) => {
         .then((response) => response.json())
         .then((result) => setCount(result));
       console.log("for", hospital.id, " count  = ", todayCount);
-    });
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="hospital-card-container">
-      {hospital.name}
-      <div className="hospital-card-content">
-        <span>Patients admitted today: {todayCount}</span>
-        <span>Total Patient Count: {hospital.patient_count}</span>
+    <Link className="link-to-hospital" to={`/hospital/${hospital.id}`}>
+      <div className="hospital-card-container">
+        {hospital.name}
+        <div className="hospital-card-content">
+          <span>Patients admitted today: {todayCount}</span>
+          <span>Total Patient Count: {hospital.patient_count || 0}</span>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

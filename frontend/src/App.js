@@ -9,6 +9,7 @@ import Home from "./components/home/home";
 import Dashboard from "./components/dashboard/dashboard";
 import Login from "./components/login/login";
 import Register from "./components/register/register";
+import Hospital from "./components/hospital/hospital";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -52,6 +53,9 @@ function App() {
             </Route>
             <Route exact path="/dashboard">
               {token ? <Dashboard /> : <Redirect to="/" />}
+            </Route>
+            <Route exact path={`/hospital/:id`}>
+              {token ? <Hospital /> : <Redirect to="/" />}
             </Route>
             <Route path="*">
               <h1>404</h1>

@@ -22,3 +22,8 @@
     justify-content: space-around;
     text-transform: capitalize;
 }
+
+.link-to-hospital:hover, .link-to-hospital:visited, .link-to-hospital:link, .link-to-hospital:active
+{
+    text-decoration: none;
+}
