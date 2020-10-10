@@ -30,7 +30,7 @@ const Register = () => {
     const { message: msg } = await fetch(`${backendUrl}/user/register`, {
       method: "post",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(inputs),
     }).then((response) => response.json());
@@ -43,6 +43,7 @@ const Register = () => {
   return (
     <div className="overlay">
       <div className="overlay-content">
+        {message ? <h3>{message}</h3> : null}
         <div className="form-wrapper">
           <h1>Register</h1>
           <input

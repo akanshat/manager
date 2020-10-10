@@ -5,6 +5,7 @@ import "./hospital-card.css";
 
 const HospitalCard = ({ hospital }) => {
   const [todayCount, setCount] = useState(0);
+  
   useEffect(() => {
     const interval = setInterval(() => {
       const { backendUrl } = config;
@@ -14,7 +15,6 @@ const HospitalCard = ({ hospital }) => {
       })
         .then((response) => response.json())
         .then((result) => setCount(result));
-      console.log("for", hospital.id, " count  = ", todayCount);
     }, 5000);
     return () => clearInterval(interval);
   }, []);

@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
+import config from "../../config";
+import Toast from "../../utils/toast";
 import "./hospital.css";
 
 const AddPatientForm = ({ hospitalId }) => {
+  const { backendUrl } = config;
   const [pdetails, setDetails] = useState({
     firstname: "",
     lastname: "",
@@ -22,6 +26,16 @@ const AddPatientForm = ({ hospitalId }) => {
       ...pdetails,
       [event.target.name]: event.target.value,
     });
+  };
+
+  const handleSubmit = async () => {
+    const { message: msg } = await fetch(`${backendUrl}/patient/`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(pdetails),
+    }).then((response) => response.json());
   };
 
   return (
@@ -114,20 +128,97 @@ const AddPatientForm = ({ hospitalId }) => {
           placeholder="Symptoms/Medical Details"
         ></textarea>
 
-        <button className="input-button">Add patient</button>
+        <button type="submit" onClick={handleSubmit} className="input-button">
+          Add patient
+        </button>
       </form>
     </div>
   );
 };
 
 const Hospital = () => {
+  const { backendUrl } = config;
   const { id } = useParams();
+  const [open, setOpen] = useState(false);
+  const [hospDetails, setHospDetails] = useState({
+    name: "",
+    patient_count: 0,
+    patientCountToday: 0,
+  });
+  const [pList, setpList] = useState([]);
 
+  useEffect(() => {
+    fetch(`${backendUrl}/hospital/details/${id}`)
+      .then((response) => response.json())
+      .then((result) => setHospDetails(result));
+  }, []);
+
+  useEffect(() => {
+    fetch(`${backendUrl}/patient/${id}`)
+      .then((response) => response.json())
+      .then((result) => setpList(result));
+  }, []);
+
+  console.log("hospDetails = ", hospDetails);
+
+  const { name, patient_count, patientCountToday } = hospDetails;
+
+  if (pList) {
+    var patientItems = pList.map((patient) => {
+      const dateItem = patient.admission_date.split("T")[0];
+      return (
+        <tr key={patient.id}>
+          <td key={patient.firstname}>{patient.firstname}</td>
+          <td key={patient.lastname}>{patient.lastname}</td>
+          <td key={patient.phone}>{patient.phone}</td>
+          <td key={patient.emergency_contact}>{patient.emergency_contact}</td>
+          <td key={patient.age}>{patient.age}</td>
+          <td key={patient.gender}>{patient.gender}</td>
+          <td key={patient.bloodtype}>{patient.bloodtype}</td>
+          <td key={patient.weight}>{patient.weight}</td>
+          <td key={patient.height}>{patient.height}</td>
+          <td key={patient.detials}>{patient.details}</td>
+          <td key={patient.admission_date}>{dateItem}</td>
+        </tr>
+      );
+    });
+  }
   return (
-    <div className="hospital-page">
-      <div>hospital id = {id}</div>
-      <AddPatientForm />
-      <div>patient list</div>
+    <div className="container-toggle">
+      <button
+        onClick={() => {
+          setOpen((o) => !o);
+        }}
+      >
+        Add
+      </button>
+      {open ? <AddPatientForm /> : null}
+      <div className="hospital-page">
+        <div>
+          <div>hospital id = {name}</div>
+        </div>
+        <div className="table-container">
+          <h1>List of Patients</h1>
+          <table>
+            <thead>
+              <tr>
+                <th key="firstname">First Name</th>
+                <th key="lastname">Last Name</th>
+                <th key="phone">Phone Number</th>
+                <th key="emergency">Emergency Contact Number</th>
+                <th key="age">Age</th>
+                <th key="gender">Gender</th>
+                <th key="bloodtype">Blood Type</th>
+                <th key="weight">Weight</th>
+                <th key="height">Height</th>
+                <th key="detials">Medical Details</th>
+                <th key="date">Date of Admission</th>
+              </tr>
+              {patientItems}
+            </thead>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };

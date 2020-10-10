@@ -1,36 +1,83 @@
-.hospital-page{
-    width: 100vw;
+.container-toggle{
     height: auto;
-}
-
-.input-form-container{
-    background-color: #fff5d7;
-    background-size: contain;
-    height: 80vh;
-    padding: 20px;
-}
-
-.input-field-container{
-    height: 100%;
-    width: 100%;
+    width: 100vw;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
     align-items: center;
+    justify-content: center;
 }
 
-.input-field{
-    outline: none;
-    margin: 10px;
-    width: 20vw;
-    height: 3vh;
-    border: 1px solid #e7a200;
-    text-align: center;
-    color: #e7a200;
-    font-size: 2vh;
+.hospital-page {
+  width: 100vw;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.select{
-    background-color: white;
-    text-indent: 40%;
+.input-form-container {
+  background-color: #fff5d7;
+  background-size: contain;
+  height: 70vh;
+  width: 60vw;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin: 10px;
+}
+
+.input-field-container {
+  height: 100%;
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.input-field {
+  outline: none;
+  margin: 10px;
+  width: 20vw;
+  height: 3vh;
+  border: 1px solid #e7a200;
+  text-align: center;
+  color: #e7a200;
+  font-family: "Montserrat", sans-serif;
+  font-size: 2vh;
+}
+
+.select {
+  background-color: white;
+  text-indent: 40%;
+}
+
+.table-container{
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+
+table{
+  border-collapse: collapse;
+}
+
+th, td{
+  width: 7vw;
+  height: 3vh;
+}
+
+th {
+  border: 1px solid#feb300;
+  padding: 0.5rem;
+}
+
+td {
+  border: 1px solid #ffebae;
+}
+
+th{
+  color:#ff5e6c;
+  background-color: #fff5d7;
 }
