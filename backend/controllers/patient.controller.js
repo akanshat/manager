@@ -1,3 +1,4 @@
+const { hospital } = require("../models");
 const db = require("../models");
 const Patient = db.patient;
 const Hospital = db.hospital;
@@ -39,7 +40,7 @@ const create = async (req, res) => {
       { patient_count: 1 },
       { where: { id: hospital_id } }
     );
-    res.json(patient);
+    res.status(200).json(patient);
   } catch (err) {
     console.log(err);
     res.status(500).send({
@@ -48,11 +49,19 @@ const create = async (req, res) => {
   }
 };
 
-const findAll = async (req, res) => {
+const findAllByHospitalId = async (req, res) => {
   try {
-    const patientList = await Patient.findAll();
+    const { hospitalId } = req.params;
+    console.log("hospitalId = ", hospitalId);
+    var patientList = [];
+    patientList = await Patient.findAll({
+      where: {
+        hospital_id: hospitalId,
+      },
+    });
     if (!patientList) throw new Error("No patient found");
-    res.status(200).json({ patientList });
+    console.log(patientList);
+    return res.status(200).send(patientList);
   } catch (err) {
     console.log(err);
     res.status(500).send({
@@ -85,4 +94,4 @@ const findByToday = async (req, res) => {
   }
 };
 
-module.exports = { create, findAll, findByToday };
+module.exports = { create, findAllByHospitalId, findByToday };

@@ -1,5 +1,6 @@
 const db = require("../models");
 const Hospital = db.hospital;
+const Patient = db.patient;
 const Op = db.Sequelize.Op;
 
 const create = async (req, res) => {
@@ -51,7 +52,7 @@ const findOne = async (req, res) => {
 
     if (!hospitalItem) throw new Error("Not Found");
 
-    res.status(200).json(hospitalItem);
+    return res.status(200).send(hospitalItem);
   } catch (err) {
     console.log(err);
     res.status(500).send({
@@ -60,4 +61,40 @@ const findOne = async (req, res) => {
   }
 };
 
-module.exports = { create, findAll, findOne };
+const getAllDetailsById = async (req, res) => {
+  try {
+    const { hospitalId } = req.params;
+    let HospitalDetailsEntity = {};
+    const hospitalItem = await Hospital.findOne({
+      where: {
+        id: hospitalId,
+      },
+    });
+
+    HospitalDetailsEntity.name = hospitalItem.name;
+    HospitalDetailsEntity.patient_count = hospitalItem.patient_count;
+
+    const TODAY_START = new Date().setHours(0, 0, 0, 0);
+    const NOW = new Date();
+
+    const patientCountToday = await Patient.count({
+      where: {
+        hospital_id: hospitalId,
+        admission_date: {
+          [Op.gt]: TODAY_START,
+          [Op.lt]: NOW,
+        },
+      },
+    });
+
+    HospitalDetailsEntity.patientCountToday = patientCountToday;
+    return res.status(200).json(HospitalDetailsEntity);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      message: err.message || "Error getting the hospital details",
+    });
+  }
+};
+
+module.exports = { create, findAll, findOne, getAllDetailsById };

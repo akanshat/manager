@@ -25,8 +25,7 @@ module.exports = (sequelize, Sequelize) => {
         unique: true,
       },
       emergency_contact: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        type: Sequelize.STRING
       },
       age: {
         type: Sequelize.INTEGER,
