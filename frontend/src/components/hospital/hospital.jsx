@@ -41,6 +41,7 @@ const AddPatientForm = ({ hospitalId }) => {
   return (
     <div className="input-form-container">
       <form className="input-field-container">
+        <h2>ADD PATIENT</h2>
         <div className="name">
           <input
             className="input-field"
@@ -140,6 +141,8 @@ const Hospital = () => {
   const { backendUrl } = config;
   const { id } = useParams();
   const [open, setOpen] = useState(false);
+  const [classname, setClassname] = useState("add-patient-button");
+  const [buttonText, setButtonText] = useState("Add Patient");
   const [hospDetails, setHospDetails] = useState({
     name: "",
     patient_count: 0,
@@ -158,8 +161,6 @@ const Hospital = () => {
       .then((response) => response.json())
       .then((result) => setpList(result));
   }, []);
-
-  console.log("hospDetails = ", hospDetails);
 
   const { name, patient_count, patientCountToday } = hospDetails;
 
@@ -185,20 +186,32 @@ const Hospital = () => {
   }
   return (
     <div className="container-toggle">
-      <button
-        onClick={() => {
-          setOpen((o) => !o);
-        }}
-      >
-        Add
-      </button>
-      {open ? <AddPatientForm /> : null}
       <div className="hospital-page">
-        <div>
-          <div>hospital id = {name}</div>
+        <div className="hospital-page-header">
+          <div className="hospital-name">{name}</div>
+          <div className="count">
+            <span>Patients Admitted Today: {patientCountToday}</span>
+            <span>Total Patients: {patient_count}</span>
+          </div>
         </div>
+        <button
+          className={`input-button ${classname}`}
+          onClick={() => {
+            setOpen((o) => !o);
+            open == false
+              ? setButtonText("Cancel")
+              : setButtonText("Add Patient");
+            open == false
+              ? setClassname("cancel-button")
+              : setClassname("add-patient-button");
+          }}
+        >
+          {buttonText}
+        </button>
+
+        {open ? <AddPatientForm /> : null}
         <div className="table-container">
-          <h1>List of Patients</h1>
+          <h3>List of Patients</h3>
           <table>
             <thead>
               <tr>

@@ -8,6 +8,7 @@
 }
 
 .hospital-page {
+  padding: 10px;
   width: 100vw;
   height: auto;
   display: flex;
@@ -18,8 +19,8 @@
 
 .input-form-container {
   background-color: #fff5d7;
-  background-size: contain;
-  height: 70vh;
+  background-size: cover;
+  height: 80vh;
   width: 60vw;
   border-radius: 8px;
   padding: 10px;
@@ -80,4 +81,45 @@ td {
 th{
   color:#ff5e6c;
   background-color: #fff5d7;
+}
+
+.hospital-page-header{
+  height: 30vh;
+  width: 90vw;
+  background-color: #000000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 1.5rem;
+  color: white;
+}
+
+.hospital-name{
+  text-transform: uppercase;
+  margin-bottom: 2vh;
+  font-size: 6vh;
+  font-weight: 700;
+}
+
+.count{
+  margin-top: 4vh;
+  display: flex;
+  width: 50vw;
+  justify-content: space-evenly;
+  font-size: 1.5rem;
+}
+
+.add-patient-button{
+  margin-left: 80vw;
+}
+
+.cancel-button{
+  background-color: #feb300;
+  color: #000000;
+  margin-left: 80vw;
+}
+.cancel-button:hover{
+  background-color:#fff5d7;
 }
