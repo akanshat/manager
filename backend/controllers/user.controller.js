@@ -29,16 +29,18 @@ const register = async (req, res) => {
               email: email,
               hash: hash,
             };
-            console.log("userEntity = ", userEntity);
+
             const user = await User.create(userEntity);
-            res.status(201).json(user);
+            return res
+              .status(201)
+              .json({ message: "Registered Succesfully !!" });
           }
         });
       }
     });
   } catch (err) {
     console.log(err);
-    res.status(500).send({
+    return res.status(500).json({
       message: err.message || "Error creating the user entry",
     });
   }
@@ -58,16 +60,17 @@ const login = async (req, res) => {
     });
     const hash = dbUser.hash;
 
-    if (!hash) res.status(404).json("No such user exists");
+    if (!hash) return res.status(404).json({ message: "No such user exists" });
 
     const validPassword = await bcrypt.compare(password, hash);
-    if (!validPassword) return res.status(400).json({ error: "Invalid email or password" });
+    if (!validPassword)
+      return res.status(400).json({ error: "Invalid email or password" });
 
     const token = jwt.sign(email, accessTokenSecret);
-    res.status(200).json({ token });
+    return res.status(200).json({ token });
   } catch (err) {
     console.log(err);
-    res.status(500).send({
+    return res.status(500).json({
       message: err.message || "Error loggin in",
     });
   }

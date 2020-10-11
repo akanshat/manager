@@ -52,7 +52,6 @@ const create = async (req, res) => {
 const findAllByHospitalId = async (req, res) => {
   try {
     const { hospitalId } = req.params;
-    console.log("hospitalId = ", hospitalId);
     var patientList = [];
     patientList = await Patient.findAll({
       where: {
@@ -60,7 +59,7 @@ const findAllByHospitalId = async (req, res) => {
       },
     });
     if (!patientList) throw new Error("No patient found");
-    console.log(patientList);
+
     return res.status(200).send(patientList);
   } catch (err) {
     console.log(err);

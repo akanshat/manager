@@ -26,5 +26,5 @@ router.use("/patient", patientRouter);
 server.use("/", router);
 
 server.listen(PORT, () => {
-  console.log(`server running at ${PORT}`);
+  console.log(`server is running at ${PORT}`);
 });
