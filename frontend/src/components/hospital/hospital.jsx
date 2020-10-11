@@ -3,10 +3,18 @@ import { Redirect } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 import config from "../../config";
+import { useAuth } from "../../contexts/auth";
 import Toast from "../../utils/toast";
+import power from "../../assets/power.png";
 import "./hospital.css";
 
-const AddPatientForm = ({ hospitalId }) => {
+const AddPatientForm = ({
+  hospitalId,
+  open,
+  setOpen,
+  setButtonText,
+  setClassname,
+}) => {
   const { backendUrl } = config;
   const [pdetails, setDetails] = useState({
     hospital_id: hospitalId,
@@ -29,7 +37,8 @@ const AddPatientForm = ({ hospitalId }) => {
     });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     if (!pdetails.hospital_id) {
       Toast.fire({
         icon: "error",
@@ -56,13 +65,18 @@ const AddPatientForm = ({ hospitalId }) => {
       return <Redirect to={`/hospital/${hospitalId}`} />;
     }
 
-    const { message: msg } = await fetch(`${backendUrl}/patient/`, {
+    await fetch(`${backendUrl}/patient/`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(pdetails),
     }).then((response) => response.json());
+    if (open === true) {
+      setOpen(false);
+      setButtonText("Add Patient");
+      setClassname("add-patient-button");
+    }
     return <Redirect to={`/hospital/${hospitalId}`} />;
   };
 
@@ -199,6 +213,7 @@ const AddPatientForm = ({ hospitalId }) => {
 const Hospital = () => {
   const { backendUrl } = config;
   const { id } = useParams();
+  const { logMeOut } = useAuth();
   const [open, setOpen] = useState(false);
   const [classname, setClassname] = useState("add-patient-button");
   const [buttonText, setButtonText] = useState("Add Patient");
@@ -213,13 +228,13 @@ const Hospital = () => {
     fetch(`${backendUrl}/hospital/details/${id}`)
       .then((response) => response.json())
       .then((result) => setHospDetails(result));
-  }, []);
+  }, [open, backendUrl, id]);
 
   useEffect(() => {
     fetch(`${backendUrl}/patient/${id}`)
       .then((response) => response.json())
       .then((result) => setpList(result));
-  }, []);
+  }, [open, backendUrl, id]);
 
   const { name, patient_count, patientCountToday } = hospDetails;
 
@@ -228,6 +243,7 @@ const Hospital = () => {
       const dateItem = patient.admission_date.split("T")[0];
       return (
         <tr key={patient.id}>
+          <td key={patient.id}>{patient.id}</td>
           <td key={patient.firstname}>{patient.firstname}</td>
           <td key={patient.lastname}>{patient.lastname}</td>
           <td key={patient.phone}>{patient.phone}</td>
@@ -246,6 +262,9 @@ const Hospital = () => {
   return (
     <div className="container-toggle">
       <div className="hospital-page">
+        <div onClick={logMeOut}>
+          <img className="logout-button" alt="power" src={power} />
+        </div>
         <div className="hospital-page-header">
           <div className="hospital-name">{name}</div>
           <div className="count">
@@ -267,13 +286,21 @@ const Hospital = () => {
         >
           {buttonText}
         </button>
-
-        {open ? <AddPatientForm hospitalId={id} /> : null}
+        {open ? (
+          <AddPatientForm
+            hospitalId={id}
+            open={open}
+            setOpen={setOpen}
+            setButtonText={setButtonText}
+            setClassname={setClassname}
+          />
+        ) : null}
         <div className="table-container">
           <h2>LIST OF PATIENTS</h2>
           <table>
             <thead>
               <tr>
+              <th key="id">Patient ID</th>
                 <th key="firstname">First Name</th>
                 <th key="lastname">Last Name</th>
                 <th key="phone">Phone Number</th>

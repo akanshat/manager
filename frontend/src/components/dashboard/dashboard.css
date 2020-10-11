@@ -15,7 +15,7 @@
   position: fixed;
   z-index: 5;
   top: 4.5vh;
-  right: 1.5vw;
+  right: 1.8vw;
   cursor: pointer;
 }
 
@@ -37,6 +37,12 @@
   height: 90%;
 }
 
+.search-header h1{
+  font-size: 6vh;
+  text-transform: uppercase;
+  margin-bottom: 10vh;
+}
+
 .searchbox {
   outline: none;
   width: 35vw;
@@ -44,6 +50,7 @@
   border-radius: 10px;
   border: 1px solid #feb300;
   text-align: center;
+  font-size: 1.7vh;
 }
 .dashboard-divider {
   height: 150vh;

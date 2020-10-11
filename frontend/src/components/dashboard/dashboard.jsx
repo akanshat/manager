@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../contexts/auth";
-import { Link, Redirect } from "react-router-dom";
 
 import dashbg from "../../assets/dashbg.png";
 import power from "../../assets/power.png";
@@ -36,7 +35,8 @@ const Dashboard = () => {
           <img className="logout-button" alt="power" src={power} />
         </div>
         <img className="dashbg" alt="bg" src={dashbg} />
-        <div className="searchbar">
+        <div className="search-header">
+          <h1>Digital Hospital Manager</h1>
           <input
             type="text"
             className="searchbox"
