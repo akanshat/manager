@@ -25,7 +25,7 @@
   border-radius: 8px;
   padding: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  margin: 10px;
+  margin-bottom: 4vh;
 }
 
 .input-field-container {
@@ -48,11 +48,17 @@
   color: #e7a200;
   font-family: "Montserrat", sans-serif;
   font-size: 2vh;
+  text-align: center;
 }
 
 .select {
   background-color: white;
   text-indent: 40%;
+}
+
+.bloodgroup{
+  background-color: white;
+  text-indent: 35%;
 }
 
 .table-container{
@@ -98,13 +104,13 @@ th{
 
 .hospital-name{
   text-transform: uppercase;
-  margin-bottom: 2vh;
+  margin-bottom: 3vh;
   font-size: 6vh;
   font-weight: 700;
 }
 
 .count{
-  margin-top: 4vh;
+  margin-top: 5vh;
   display: flex;
   width: 50vw;
   justify-content: space-evenly;
@@ -116,10 +122,11 @@ th{
 }
 
 .cancel-button{
-  background-color: #feb300;
+  background-color: #fff5d7;
+  border: 1px solid black;
   color: #000000;
   margin-left: 80vw;
 }
 .cancel-button:hover{
-  background-color:#fff5d7;
+  background-color:#fce9b0;
 }

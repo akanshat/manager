@@ -8,7 +8,7 @@
 
 .overlay-content {
   width: 40vw;
-  height: 60vh;
+  height: 70vh;
   background-color: white;
   margin-left: 30vw;
   margin-top: 20vh;
@@ -20,13 +20,14 @@
   padding: 3vw 3vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 }
 
 .form-wrapper > h1 {
   text-transform: uppercase;
   margin-bottom: 50px;
+  margin-top: 30px;
 }
 
 .input-item {

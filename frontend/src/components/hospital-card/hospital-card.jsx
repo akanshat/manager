@@ -5,19 +5,16 @@ import "./hospital-card.css";
 
 const HospitalCard = ({ hospital }) => {
   const [todayCount, setCount] = useState(0);
-  
+
   useEffect(() => {
     const interval = setInterval(() => {
       const { backendUrl } = config;
-      fetch(`${backendUrl}/patient/today/${hospital.id}`, {
-        method: "get",
-        headers: {},
-      })
+      fetch(`${backendUrl}/patient/today/${hospital.id}`)
         .then((response) => response.json())
         .then((result) => setCount(result));
-    }, 5000);
+    }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [hospital.id]);
 
   return (
     <Link className="link-to-hospital" to={`/hospital/${hospital.id}`}>

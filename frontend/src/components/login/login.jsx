@@ -20,13 +20,16 @@ const Login = () => {
       });
       return <Redirect to="/login" />;
     }
-    const { token: fetchToken } = await fetch(`${backendUrl}/user/login`, {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(inputs),
-    }).then((response) => response.json());
+    const { token: fetchToken, message: msg } = await fetch(
+      `${backendUrl}/user/login`,
+      {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(inputs),
+      }
+    ).then((response) => response.json());
 
     if (!fetchToken) {
       Toast.fire({
@@ -38,6 +41,7 @@ const Login = () => {
 
     localStorage.setItem("token", fetchToken);
     setToken(fetchToken);
+    setMessage(msg);
   };
 
   const handleInput = (event) => {

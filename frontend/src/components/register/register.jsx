@@ -34,7 +34,7 @@ const Register = () => {
       },
       body: JSON.stringify(inputs),
     }).then((response) => response.json());
-    console.log(msg);
+    
     setMessage(msg);
   };
 
@@ -43,8 +43,8 @@ const Register = () => {
   return (
     <div className="overlay">
       <div className="overlay-content">
-        {message ? <h3>{message}</h3> : null}
         <div className="form-wrapper">
+          {message ? <h3>{message}</h3> : null}
           <h1>Register</h1>
           <input
             className="input-item"

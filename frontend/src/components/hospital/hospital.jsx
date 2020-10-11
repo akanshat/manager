@@ -9,13 +9,14 @@ import "./hospital.css";
 const AddPatientForm = ({ hospitalId }) => {
   const { backendUrl } = config;
   const [pdetails, setDetails] = useState({
+    hospital_id: hospitalId,
     firstname: "",
     lastname: "",
     phone: "",
     emergency_contact: "",
     age: "",
-    gender: "",
-    bloodtype: "",
+    gender: "Gender",
+    bloodtype: "Blood Group",
     weight: "",
     height: "",
     details: "",
@@ -29,6 +30,32 @@ const AddPatientForm = ({ hospitalId }) => {
   };
 
   const handleSubmit = async () => {
+    if (!pdetails.hospital_id) {
+      Toast.fire({
+        icon: "error",
+        title: "invalid details",
+      });
+    }
+
+    if (
+      !pdetails.firstname ||
+      !pdetails.lastname ||
+      !pdetails.phone ||
+      !pdetails.age ||
+      !pdetails.gender ||
+      !pdetails.height ||
+      !pdetails.weight ||
+      !pdetails.emergency_contact ||
+      !pdetails.details ||
+      !pdetails.bloodtype
+    ) {
+      Toast.fire({
+        icon: "warning",
+        title: "All details are required",
+      });
+      return <Redirect to={`/hospital/${hospitalId}`} />;
+    }
+
     const { message: msg } = await fetch(`${backendUrl}/patient/`, {
       method: "post",
       headers: {
@@ -36,6 +63,7 @@ const AddPatientForm = ({ hospitalId }) => {
       },
       body: JSON.stringify(pdetails),
     }).then((response) => response.json());
+    return <Redirect to={`/hospital/${hospitalId}`} />;
   };
 
   return (
@@ -71,7 +99,7 @@ const AddPatientForm = ({ hospitalId }) => {
         <input
           className="input-field"
           type="text"
-          name="emergencyContact"
+          name="emergency_contact"
           value={pdetails.emergency_contact}
           onChange={handleInput}
           placeholder="Emergency Contact"
@@ -87,21 +115,52 @@ const AddPatientForm = ({ hospitalId }) => {
         <select
           className="input-field select"
           id="gender"
+          name="gender"
           value={pdetails.gender}
           onChange={handleInput}
         >
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
+          <option defaultValue>Gender</option>
+          <option key={"male"} value="male">
+            Male
+          </option>
+          <option key={"female"} value="female">
+            Female
+          </option>
         </select>
 
-        <input
-          className="input-field"
-          type="text"
+        <select
+          className="input-field bloodgroup"
+          id="bloodtype"
           name="bloodtype"
           value={pdetails.bloodtype}
           onChange={handleInput}
-          placeholder="Blood Group"
-        />
+        >
+          <option defaultValue>Blood Group</option>
+          <option key={"A+"} value="A+">
+            A+
+          </option>
+          <option key={"A-"} value="A-">
+            A-
+          </option>
+          <option key={"B+"} value="B+">
+            B+
+          </option>
+          <option key={"B-"} value="B-">
+            B-
+          </option>
+          <option key={"O+"} value="O+">
+            O+
+          </option>
+          <option key={"O-"} value="O-">
+            O-
+          </option>
+          <option key={"AB+"} value="AB+">
+            AB+
+          </option>
+          <option key={"AB-"} value="AB-">
+            AB-
+          </option>
+        </select>
 
         <input
           className="input-field"
@@ -198,10 +257,10 @@ const Hospital = () => {
           className={`input-button ${classname}`}
           onClick={() => {
             setOpen((o) => !o);
-            open == false
+            open === false
               ? setButtonText("Cancel")
               : setButtonText("Add Patient");
-            open == false
+            open === false
               ? setClassname("cancel-button")
               : setClassname("add-patient-button");
           }}
@@ -209,9 +268,9 @@ const Hospital = () => {
           {buttonText}
         </button>
 
-        {open ? <AddPatientForm /> : null}
+        {open ? <AddPatientForm hospitalId={id} /> : null}
         <div className="table-container">
-          <h3>List of Patients</h3>
+          <h2>LIST OF PATIENTS</h2>
           <table>
             <thead>
               <tr>
