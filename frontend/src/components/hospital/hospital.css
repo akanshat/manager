@@ -76,17 +76,18 @@ th, td{
 }
 
 th {
-  border: 1px solid#feb300;
+  border: 1px solid black;
   padding: 0.5rem;
+  text-transform: uppercase;
 }
 
 td {
-  border: 1px solid #ffebae;
+  border: 1px solid black;
 }
 
 th{
-  color:#ff5e6c;
-  background-color: #fff5d7;
+  color: #feb300;
+  background-color: #ffffff;
 }
 
 .hospital-page-header{
@@ -129,4 +130,17 @@ th{
 }
 .cancel-button:hover{
   background-color:#fce9b0;
+}
+
+.back-link:hover, .back-link:visited, .back-link:link, .back-link:active
+{
+    text-decoration: none;
+}
+
+.back-tag{
+  color: white;
+  margin-right: 94vw;
+  margin-top: -6vh;
+  font-size: 2vh;
+  border-bottom: 1px solid white;
 }

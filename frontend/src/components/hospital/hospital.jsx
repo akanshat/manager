@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 import config from "../../config";
@@ -266,6 +266,9 @@ const Hospital = () => {
           <img className="logout-button" alt="power" src={power} />
         </div>
         <div className="hospital-page-header">
+        <Link className="back-link" to="/">
+            <p className="back-tag">Back</p>
+          </Link>
           <div className="hospital-name">{name}</div>
           <div className="count">
             <span>Patients Admitted Today: {patientCountToday}</span>

@@ -24,9 +24,11 @@ const Dashboard = () => {
       .then((result) => setHosList(result));
   }, [query]);
 
-  const hospitalCards = hosList.map((hospital) => (
-    <HospitalCard hospital={hospital} key={hospital.id} />
-  ));
+  if (hosList.length > 0) {
+    var hospitalCards = hosList.map((hospital) => (
+      <HospitalCard hospital={hospital} key={hospital.id} />
+    ));
+  }
 
   return (
     <div className="dashboard-container">
@@ -47,7 +49,9 @@ const Dashboard = () => {
           />
         </div>
       </div>
-      <div className="hospital-cards-div">{hospitalCards}</div>
+      {hospitalCards ? (
+        <div className="hospital-cards-div">{hospitalCards}</div>
+      ) : null}
     </div>
   );
 };

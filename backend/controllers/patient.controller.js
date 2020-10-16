@@ -21,6 +21,8 @@ const create = async (req, res) => {
       details,
     } = req.body;
 
+    const admission_date = new Date();
+    console.log(admission_date)
     const PatientEntity = {
       hospital_id,
       firstname,
@@ -33,6 +35,7 @@ const create = async (req, res) => {
       weight,
       height,
       details,
+      admission_date
     };
 
     const patient = await Patient.create(PatientEntity);
