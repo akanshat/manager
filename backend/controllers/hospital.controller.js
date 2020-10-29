@@ -33,7 +33,7 @@ const findAll = async (req, res) => {
     });
     if (!hospitalList) throw new Error("No Hospitals found");
     res.status(200).json(hospitalList);
-  } catch (error) {
+  } catch (err) {
     console.log(err);
     res.status(500).send({
       message: err.message || "Error creating the hospital entry",

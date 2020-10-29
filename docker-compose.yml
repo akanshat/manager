@@ -1,22 +1,40 @@
 version: "3.1"
 
 services:
+  db:
+    image: mysql
+    restart: always
+    expose:
+      - 3306
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_USER: 'akansha'
+      MYSQL_PASSWORD: 'akansha'
+      MYSQL_ROOT_PASSWORD: 'akansha'
+      MYSQL_DATABASE: 'manager'
+      MYSQL_ROOT_HOST: '%'
+    volumes: 
+      - ${PWD}/mysql/data:/var/lib/mysql
   backend:
     build:
       context: ./backend
+    restart: unless-stopped
     ports:
-      - "4000:4000"
-    container_name: node-api
+      - 4000:4000
+    container_name: node-app
     volumes:
-      - ./api:/usr/src/app/api
-      - /usr/src/app/api/node_modules
+      - ${PWD}/backend:/usr/src/app/
+      - /usr/src/app/node_modules
+    depends_on:
+      - db
   frontend:
     build:
       context: ./frontend
     ports:
-      - "3000:3000"
+      - 3000:3000
     container_name: react-app
     stdin_open: true
     volumes:
-      - ./my-app:/usr/src/app/my-app
-      - /usr/src/app/my-app/node_modules
+      - "${PWD}/frontend:/usr/app"
+      - "/usr/app/node_modules"
